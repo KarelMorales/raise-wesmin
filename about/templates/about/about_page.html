@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-about-page{% endblock %}
+
+{% block content %}
+    <!-- Hero Section - Clean Version -->
+    <div class="about-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
+                    <!-- Simple Badge -->
+                    <div class="hero-badge mb-4">
+                        <span class="badge-custom">ABOUT RAISE</span>
+                    </div>
+                    
+                    <!-- Title and Subtitle - Clean and Separated -->
+                    <h1 class="about-hero-title">{{ page.hero_title }}</h1>
+                    <p class="about-hero-subtitle">{{ page.hero_subtitle }}</p>
+                    
+                    <!-- Stats in a single row -->
+                    <div class="hero-stats mt-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <div class="stat-number">5+</div>
+                                    <div class="stat-label">Partner Institutions</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <div class="stat-number">50+</div>
+                                    <div class="stat-label">Research Projects</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <div class="stat-number">100+</div>
+                                    <div class="stat-label">Technologies</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <div class="stat-number">1000+</div>
+                                    <div class="stat-label">Beneficiaries</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Simple wave -->
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path fill="#ffffff" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Knowledge Hub Section - Modern Card -->
+    <div class="container my-5 py-4">
+        <div class="knowledge-hub-card" data-aos="fade-up">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="knowledge-hub-icon mb-4">
+                        <i class="bi bi-diagram-3-fill"></i>
+                    </div>
+                    <h2 class="section-title mb-3">{{ page.knowledge_hub_title }}</h2>
+                    <h3 class="knowledge-hub-subtitle">{{ page.knowledge_hub_subtitle }}</h3>
+                    <p class="knowledge-hub-description">{{ page.knowledge_hub_description }}</p>
+                    <div class="mt-4">
+                        <a href="/knowledge/" class="btn btn-outline-custom btn-custom">
+                            Explore Knowledge Hub <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="knowledge-hub-grid">
+                        <div class="grid-item">
+                            <i class="bi bi-file-text"></i>
+                            <span>Research Papers</span>
+                        </div>
+                        <div class="grid-item">
+                            <i class="bi bi-book"></i>
+                            <span>Case Studies</span>
+                        </div>
+                        <div class="grid-item">
+                            <i class="bi bi-journal-code"></i>
+                            <span>Technical Guides</span>
+                        </div>
+                        <div class="grid-item">
+                            <i class="bi bi-database"></i>
+                            <span>Datasets</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program Rationale Section with Timeline Effect -->
+    <div class="rationale-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title d-inline-block">{{ page.rationale_title }}</h2>
+                    </div>
+                    
+                    <!-- Consortium Members Grid -->
+                    <div class="consortium-grid mb-5" data-aos="fade-up">
+                        <h4 class="text-center mb-4">Our Partner Institutions</h4>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="consortium-card">
+                                    <i class="bi bi-building"></i>
+                                    <h5>WMSU</h5>
+                                    <p>Western Mindanao State University</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="consortium-card">
+                                    <i class="bi bi-building"></i>
+                                    <h5>JHCSC</h5>
+                                    <p>J.H. Cerilles State College</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="consortium-card">
+                                    <i class="bi bi-building"></i>
+                                    <h5>JRMSU</h5>
+                                    <p>Jose Rizal Memorial State University</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="consortium-card">
+                                    <i class="bi bi-building"></i>
+                                    <h5>PRRI</h5>
+                                    <p>Philippine Rubber Research Institute</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="consortium-card">
+                                    <i class="bi bi-building"></i>
+                                    <h5>ZSCMST</h5>
+                                    <p>Zamboanga State College of Marine Sciences and Technology</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rationale-content" data-aos="fade-up" data-aos-delay="100">
+                        <i class="bi bi-quote display-1 text-accent mb-3"></i>
+                        {{ page.rationale_content|richtext }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program Objectives Section with Modern Cards -->
+    <div class="container my-5 py-4">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title d-inline-block">{{ page.objectives_title }}</h2>
+        </div>
+        
+        <div class="row g-4">
+            <!-- General Objective Card -->
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="objective-card general-card">
+                    <div class="objective-icon">
+                        <i class="bi bi-bullseye"></i>
+                    </div>
+                    <h3 class="objective-title">{{ page.general_objective_title }}</h3>
+                    <div class="objective-text">
+                        {{ page.general_objective }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Specific Objectives Card -->
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="objective-card specific-card">
+                    <div class="objective-icon">
+                        <i class="bi bi-list-check"></i>
+                    </div>
+                    <h3 class="objective-title">{{ page.specific_objectives_title }}</h3>
+                    <div class="objective-text">
+                        {{ page.specific_objectives|richtext }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organizational Structure Section with Image Gallery Style -->
+    <div class="org-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title d-inline-block">{{ page.org_title }}</h2>
+                <p class="org-description">{{ page.org_description }}</p>
+            </div>
+            
+            {% if page.org_image %}
+            <div class="org-image-wrapper" data-aos="zoom-in">
+                <div class="org-image-container">
+                    {% image page.org_image width-1200 class="org-image img-fluid" %}
+                    <div class="org-image-overlay">
+                        <div class="overlay-content">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                            <span>Click to zoom</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Organizational Highlights -->
+            <div class="row mt-5 g-4">
+                <div class="col-md-3 col-6">
+                    <div class="org-highlight">
+                        <i class="bi bi-people"></i>
+                        <span>Project Leaders</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="org-highlight">
+                        <i class="bi bi-diagram-2"></i>
+                        <span>Technical Staff</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="org-highlight">
+                        <i class="bi bi-briefcase"></i>
+                        <span>Administrative</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="org-highlight">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Researchers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RAISE Projects Section with Timeline -->
+    <div class="projects-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title d-inline-block">{{ page.projects_title }}</h2>
+                <p class="projects-description">{{ page.projects_description }}</p>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="projects-image-wrapper">
+                        {% if page.projects_image %}
+                            {% image page.projects_image width-800 class="projects-image img-fluid" %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="projects-timeline">
+                        <h4 class="mb-4">Current Initiatives</h4>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>IP-TBM Phase 2</h5>
+                                <p>Intellectual Property and Technology Business Management</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>ATBI Phase 2</h5>
+                                <p>Agri-Aqua Technology Business Incubator</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>Technology Transfer</h5>
+                                <p>Commercialization of S&T Innovations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
