@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-knowledge-page{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <div class="knowledge-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h1 class="knowledge-hero-title">{{ page.hero_title }}</h1>
+                    <p class="knowledge-hero-subtitle">{{ page.hero_subtitle }}</p>
+                    
+                    <!-- Search Bar -->
+                    <div class="knowledge-search-wrapper mt-4">
+                        <form method="get" action="{% pageurl page %}">
+                            <div class="search-box">
+                                <i class="bi bi-search"></i>
+                                <input type="text" name="q" placeholder="Search resources..." value="{{ search_query|default:'' }}">
+                                <button type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="knowledge-stats mt-4">
+                        <span class="stat-badge">
+                            <i class="bi bi-files"></i> {{ total_resources }} Total Resources
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5 py-4">
+        <div class="row">
+            <!-- Left Sidebar - Categories -->
+            <div class="col-lg-3 mb-4" data-aos="fade-right">
+                <div class="knowledge-sidebar">
+                    <h5 class="sidebar-title">
+                        <i class="bi bi-tags"></i> Resource Categories
+                    </h5>
+                    
+                    <div class="categories-list">
+                        <a href="{% pageurl page %}?category=all" class="category-item {% if current_category == 'all' %}active{% endif %}">
+                            <i class="bi bi-grid"></i>
+                            <span>All Resources</span>
+                            <span class="category-count">{{ total_resources }}</span>
+                        </a>
+                        
+                        {% for category in categories %}
+                        <a href="{% pageurl page %}?category={{ category.slug }}" class="category-item {% if current_category == category.slug %}active{% endif %}">
+                            <i class="bi bi-{{ category.icon }}"></i>
+                            <span>{{ category.name }}</span>
+                            <span class="category-count">{{ category.resources.count }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Resource Type Filter -->
+                    <div class="mt-4">
+                        <h5 class="sidebar-title">
+                            <i class="bi bi-filter"></i> Resource Type
+                        </h5>
+                        <select class="form-select mt-3" onchange="location = this.value;">
+                            <option value="{% pageurl page %}?category={{ current_category }}">All Types</option>
+                            {% for type_value, type_name in resource_types %}
+                            <option value="{% pageurl page %}?category={{ current_category }}&type={{ type_value }}" {% if current_type == type_value %}selected{% endif %}>
+                                {{ type_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Featured Resources -->
+                {% if featured_resources %}
+                <div class="featured-sidebar mt-4">
+                    <h5 class="sidebar-title">
+                        <i class="bi bi-star-fill text-warning"></i> Featured
+                    </h5>
+                    <div class="featured-list">
+                        {% for resource in featured_resources %}
+                        <a href="#" class="featured-item">
+                            {% if resource.thumbnail %}
+                                {% image resource.thumbnail fill-50x50 class="featured-thumb" %}
+                            {% else %}
+                                <i class="bi bi-{{ resource.category.icon|default:'file-text' }}"></i>
+                            {% endif %}
+                            <span>{{ resource.title|truncatechars:30 }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Main Content - Resources Grid -->
+            <div class="col-lg-9" data-aos="fade-left">
+                <div class="knowledge-main">
+                    <!-- Results Info -->
+                    <div class="results-info mb-4">
+                        <h5>Showing {{ resources.count }} resources</h5>
+                        {% if search_query %}
+                            <p>Search results for: "{{ search_query }}"</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Resources Grid -->
+                    <div class="row g-4">
+                        {% for resource in resources %}
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}">
+                            <div class="resource-card">
+                                {% if resource.thumbnail %}
+                                <div class="resource-thumb">
+                                    {% image resource.thumbnail fill-300x200 class="card-img-top" %}
+                                    {% if resource.is_featured %}
+                                    <span class="featured-badge">Featured</span>
+                                    {% endif %}
+                                </div>
+                                {% else %}
+                                <div class="resource-thumb placeholder-thumb">
+                                    <i class="bi bi-{{ resource.category.icon|default:'file-text' }}"></i>
+                                    {% if resource.is_featured %}
+                                    <span class="featured-badge">Featured</span>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                
+                                <div class="resource-body">
+                                    <div class="resource-meta">
+                                        <span class="resource-type">{{ resource.get_resource_type_display }}</span>
+                                        {% if resource.category %}
+                                        <span class="resource-category">
+                                            <i class="bi bi-{{ resource.category.icon }}"></i> {{ resource.category.name }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <h3 class="resource-title">{{ resource.title }}</h3>
+                                    
+                                    {% if resource.summary %}
+                                    <p class="resource-summary">{{ resource.summary|truncatechars:80 }}</p>
+                                    {% endif %}
+                                    
+                                    {% if resource.authors %}
+                                    <div class="resource-authors">
+                                        <i class="bi bi-people"></i> {{ resource.authors }}
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if resource.publication_date %}
+                                    <div class="resource-date">
+                                        <i class="bi bi-calendar"></i> {{ resource.publication_date|date:"M d, Y" }}
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <div class="resource-footer">
+                                        <a href="{{ resource.get_resource_url }}" class="btn-resource" target="_blank">
+                                            View Resource <i class="bi bi-box-arrow-up-right ms-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12">
+                            <div class="no-results text-center py-5">
+                                <i class="bi bi-files display-1 text-muted"></i>
+                                <h4 class="mt-4">No resources found</h4>
+                                <p class="text-muted">Try adjusting your search or filter criteria</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
