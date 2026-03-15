@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-faqs-page{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <div class="faqs-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h1 class="faqs-hero-title">{{ page.featured_title }}</h1>
+                    <p class="faqs-hero-subtitle">{{ page.featured_subtitle }}</p>
+                    
+                    <!-- Search Bar -->
+                    <div class="faqs-search-wrapper mt-4">
+                        <form method="get" action="{% pageurl page %}">
+                            <div class="search-box">
+                                <i class="bi bi-search"></i>
+                                <input type="text" name="q" placeholder="Search FAQs..." value="{{ search_query|default:'' }}">
+                                <button type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="faqs-stats mt-4">
+                        <span class="stat-badge">
+                            <i class="bi bi-question-circle"></i> {{ total_faqs }} Total FAQs
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5 py-4">
+        <div class="row">
+            <!-- Sidebar with Topics -->
+            <div class="col-lg-3 mb-4" data-aos="fade-right">
+                <div class="topics-sidebar">
+                    <h5 class="sidebar-title">
+                        <i class="bi bi-filter"></i> Filter by Topic
+                    </h5>
+                    
+                    <div class="topics-list">
+                        <a href="{% pageurl page %}?topic=all" class="topic-item {% if current_topic == 'all' %}active{% endif %}">
+                            <i class="bi bi-grid"></i>
+                            <span>All Questions</span>
+                            <span class="topic-count">{{ total_faqs }}</span>
+                        </a>
+                        
+                        {% for topic in topics %}
+                        <a href="{% pageurl page %}?topic={{ topic.slug }}" class="topic-item {% if current_topic == topic.slug %}active{% endif %}">
+                            <i class="bi bi-{{ topic.icon }}"></i>
+                            <span>{{ topic.name }}</span>
+                            <span class="topic-count">{{ topic.faqs.count }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ List -->
+            <div class="col-lg-9" data-aos="fade-left">
+                <div class="faqs-list">
+                    <!-- Results Info -->
+                    <div class="results-info mb-4">
+                        <h5>Showing {{ faqs.count }} results</h5>
+                        {% if search_query %}
+                            <p>Search results for: "{{ search_query }}"</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- FAQ Items -->
+                    <div class="accordion" id="faqAccordion">
+                        {% for faq in faqs %}
+                        <div class="accordion-item faq-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}">
+                            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                                    <div class="faq-question">
+                                        {% if faq.is_featured %}
+                                            <span class="featured-badge">Featured</span>
+                                        {% endif %}
+                                        {{ faq.question }}
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="faq-answer">
+                                        {{ faq.answer|richtext }}
+                                    </div>
+                                    {% if faq.topic %}
+                                        <div class="faq-topic mt-3">
+                                            <i class="bi bi-tag"></i> {{ faq.topic.name }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="no-results text-center py-5">
+                            <i class="bi bi-emoji-frown display-1 text-muted"></i>
+                            <h4 class="mt-4">No FAQs found</h4>
+                            <p class="text-muted">Try adjusting your search or filter criteria</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

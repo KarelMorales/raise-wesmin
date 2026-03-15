@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     "wagtail.admin",
     "wagtail",
     
+    # Third party apps
     "modelcluster",
     "taggit",
+    "wagtail_modeladmin",  # ADD THIS LINE for model admin functionality
     
     # Your apps
     "home",
