@@ -4,19 +4,45 @@
 {% block body_class %}template-forum-page{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
+    <!-- Hero Section - EXACTLY like Commodities page -->
     <div class="forum-hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
-                    <h1 class="forum-hero-title">{{ page.hero_title }}</h1>
-                    <p class="forum-hero-subtitle">{{ page.hero_subtitle }}</p>
-                    
-                    <!-- Start New Thread Button -->
-                    <div class="mt-4">
-                        <a href="#" class="btn btn-primary-custom btn-custom" data-bs-toggle="modal" data-bs-target="#newThreadModal">
-                            <i class="bi bi-plus-circle me-2"></i>Start New Discussion
-                        </a>
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
+                        <!-- Badge (like Commodities has "WELCOME TO") -->
+                        <div class="hero-badge mb-4">
+                            <span class="badge-custom">COMMUNITY FORUM</span>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h1 class="forum-hero-title">{{ page.hero_title }}</h1>
+                        
+                        <!-- Subtitle -->
+                        <p class="forum-hero-subtitle">{{ page.hero_subtitle }}</p>
+                        
+                        <!-- Action Buttons -->
+<div class="hero-actions mt-4">
+    <a href="#" class="btn-forum" data-bs-toggle="modal" data-bs-target="#newThreadModal">
+        <i class="bi bi-plus-circle me-2"></i>Start New Discussion
+    </a>
+</div>
+                        
+                        <!-- Stats (like Commodities has stats cards) -->
+                        <div class="stats-wrapper mt-5">
+                            <div class="stat-item">
+                                <span class="stat-number">{{ total_threads }}</span>
+                                <span class="stat-label">Discussions</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">{{ categories.count }}</span>
+                                <span class="stat-label">Categories</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">150+</span>
+                                <span class="stat-label">Active Users</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -24,19 +50,20 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container my-5 py-4">
+    <div class="container my-5 py-4" id="recent-discussions">
         <div class="row">
             <!-- Left Sidebar - Categories -->
             <div class="col-lg-3 mb-4" data-aos="fade-right">
                 <div class="forum-sidebar">
-                    <h5 class="sidebar-title">
-                        <i class="bi bi-tags"></i> All Topics
-                    </h5>
+                    <div class="sidebar-header">
+                        <i class="bi bi-diagram-3"></i>
+                        <h4>Topics</h4>
+                    </div>
                     
                     <div class="categories-list">
                         <a href="{% pageurl page %}?category=all" class="category-item {% if current_category == 'all' %}active{% endif %}">
                             <i class="bi bi-grid"></i>
-                            <span>All Topics</span>
+                            <span>All Discussions</span>
                             <span class="category-count">{{ total_threads }}</span>
                         </a>
                         
@@ -48,39 +75,46 @@
                         </a>
                         {% endfor %}
                     </div>
+                    
+                    <!-- Popular Tags -->
+                    <div class="popular-tags mt-4">
+                        <h5><i class="bi bi-tags"></i> Popular Tags</h5>
+                        <div class="tags-cloud">
+                            <span class="tag">#farming</span>
+                            <span class="tag">#organic</span>
+                            <span class="tag">#rice</span>
+                            <span class="tag">#fish</span>
+                            <span class="tag">#chicken</span>
+                            <span class="tag">#bamboo</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Main Content - Threads -->
             <div class="col-lg-9" data-aos="fade-left">
-                <div class="forum-main">
-                    <!-- Results Info -->
-                    <div class="results-info mb-4">
-                        <h5>{{ total_threads }} Discussions</h5>
-                        {% if current_category != 'all' %}
-                            {% for category in categories %}
-                                {% if category.slug == current_category %}
-                                    <p>Showing threads in <strong>{{ category.name }}</strong></p>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Threads List -->
+                <!-- Results Header -->
+                <div class="results-header mb-4">
+                    <h3>Recent Discussions</h3>
+                    <p>Showing <strong>{{ threads.count }}</strong> of <strong>{{ total_threads }}</strong> discussions</p>
+                </div>
+                
+                <!-- Threads List -->
+                <div class="discussions-list">
                     {% for thread in threads %}
-                    <div class="thread-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}">
+                    <div class="thread-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'30' }}">
                         <div class="thread-header">
                             <div class="thread-category">
                                 <span class="category-badge">
                                     <i class="bi bi-{{ thread.category.icon }}"></i> {{ thread.category.name }}
                                 </span>
                                 {% if thread.is_pinned %}
-                                <span class="pinned-badge">
+                                <span class="badge-pinned">
                                     <i class="bi bi-pin-fill"></i> Pinned
                                 </span>
                                 {% endif %}
                                 {% if thread.is_closed %}
-                                <span class="closed-badge">
+                                <span class="badge-closed">
                                     <i class="bi bi-lock-fill"></i> Closed
                                 </span>
                                 {% endif %}
@@ -96,7 +130,7 @@
                         </h3>
                         
                         <div class="thread-content">
-                            {{ thread.content|richtext|truncatewords_html:50 }}
+                            {{ thread.content|richtext|truncatewords_html:40 }}
                         </div>
                         
                         <div class="thread-footer">
@@ -104,18 +138,18 @@
                                 <span><i class="bi bi-person"></i> {{ thread.created_by_name|default:"Anonymous" }}</span>
                                 <span><i class="bi bi-clock"></i> {{ thread.created_at|timesince }} ago</span>
                             </div>
-                            <a href="#" class="btn-read-more">
+                            <a href="#" class="btn-read">
                                 Read Discussion <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                     {% empty %}
-                    <div class="no-results text-center py-5">
-                        <i class="bi bi-chat display-1 text-muted"></i>
-                        <h4 class="mt-4">No discussions yet</h4>
-                        <p class="text-muted">Be the first to start a conversation!</p>
-                        <a href="#" class="btn btn-primary-custom btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#newThreadModal">
-                            <i class="bi bi-plus-circle me-2"></i>Start New Discussion
+                    <div class="empty-state">
+                        <i class="bi bi-chat-square-dots"></i>
+                        <h4>No discussions yet</h4>
+                        <p>Be the first to start a conversation!</p>
+                        <a href="#" class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#newThreadModal">
+                            <i class="bi bi-plus-circle"></i> Start New Discussion
                         </a>
                     </div>
                     {% endfor %}
