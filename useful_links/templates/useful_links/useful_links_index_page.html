@@ -4,30 +4,51 @@
 {% block body_class %}template-useful-links-page{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <div class="links-hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
-                    <h1 class="links-hero-title">{{ page.featured_title }}</h1>
-                    <p class="links-hero-subtitle">{{ page.featured_subtitle }}</p>
-                    
-                    <!-- Search Bar -->
-                    <div class="links-search-wrapper mt-4">
-                        <form method="get" action="{% pageurl page %}">
-                            <div class="search-box">
-                                <i class="bi bi-search"></i>
-                                <input type="text" name="q" placeholder="Search links..." value="{{ search_query|default:'' }}">
-                                <button type="submit">Search</button>
+    <!-- Hero Section - ENLARGED like Commodities -->
+    <div class="useful-links-hero">
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                        <!-- Badge -->
+                        <div class="hero-badge mb-4">
+                            <span class="badge-custom">RESOURCE HUB</span>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h1 class="hero-title">{{ page.featured_title }}</h1>
+                        
+                        <!-- Subtitle -->
+                        <p class="hero-subtitle">{{ page.featured_subtitle }}</p>
+                        
+                        <!-- Search Bar - Modern Design -->
+                        <div class="search-wrapper mt-5">
+                            <form method="get" action="{% pageurl page %}">
+                                <div class="search-box-modern">
+                                    <i class="bi bi-search"></i>
+                                    <input type="text" name="q" placeholder="Search for resources, tools, websites..." value="{{ search_query|default:'' }}">
+                                    <button type="submit">Find Links</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Stats Card -->
+                        <div class="stats-card mt-5">
+                            <div class="stat-item">
+                                <span class="stat-number">{{ total_links }}</span>
+                                <span class="stat-label">Total Links</span>
                             </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Stats -->
-                    <div class="links-stats mt-4">
-                        <span class="stat-badge">
-                            <i class="bi bi-link-45deg"></i> {{ total_links }} Total Links
-                        </span>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-number">{{ categories.count }}</span>
+                                <span class="stat-label">Categories</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <span class="stat-number">{{ featured_links.count }}</span>
+                                <span class="stat-label">Featured</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,41 +58,68 @@
     <!-- Main Content -->
     <div class="container my-5 py-4">
         <div class="row">
-            <!-- Sidebar with Categories -->
+            <!-- Sidebar with Categories - Unique Design -->
             <div class="col-lg-3 mb-4" data-aos="fade-right">
-                <div class="categories-sidebar">
-                    <h5 class="sidebar-title">
-                        <i class="bi bi-filter"></i> Filter by Category
-                    </h5>
+                <div class="categories-panel">
+                    <div class="panel-header">
+                        <i class="bi bi-funnel-fill"></i>
+                        <h5>Filter by Category</h5>
+                    </div>
                     
-                    <div class="categories-list">
-                        <a href="{% pageurl page %}?category=all" class="category-item {% if current_category == 'all' %}active{% endif %}">
-                            <i class="bi bi-grid"></i>
+                    <div class="categories-list-modern">
+                        <a href="{% pageurl page %}?category=all" class="category-chip {% if current_category == 'all' %}active{% endif %}">
+                            <i class="bi bi-grid-3x3-gap-fill"></i>
                             <span>All Links</span>
-                            <span class="category-count">{{ total_links }}</span>
+                            <span class="chip-count">{{ total_links }}</span>
                         </a>
                         
                         {% for category in categories %}
-                        <a href="{% pageurl page %}?category={{ category.slug }}" class="category-item {% if current_category == category.slug %}active{% endif %}">
+                        <a href="{% pageurl page %}?category={{ category.slug }}" class="category-chip {% if current_category == category.slug %}active{% endif %}">
                             <i class="bi bi-{{ category.icon }}"></i>
                             <span>{{ category.name }}</span>
-                            <span class="category-count">{{ category.links.count }}</span>
+                            <span class="chip-count">{{ category.links.count }}</span>
                         </a>
                         {% endfor %}
                     </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="quick-actions mt-4">
+                        <h5 class="actions-title">Quick Actions</h5>
+                        <a href="#" class="action-item">
+                            <i class="bi bi-plus-circle"></i>
+                            <span>Suggest a Link</span>
+                        </a>
+                        <a href="#" class="action-item">
+                            <i class="bi bi-star"></i>
+                            <span>Most Popular</span>
+                        </a>
+                        <a href="#" class="action-item">
+                            <i class="bi bi-clock-history"></i>
+                            <span>Recently Added</span>
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Featured Links Section (Optional) -->
+                <!-- Featured Links Card -->
                 {% if featured_links %}
-                <div class="featured-sidebar mt-4">
-                    <h5 class="sidebar-title">
-                        <i class="bi bi-star-fill text-warning"></i> Featured
-                    </h5>
-                    <div class="featured-list">
+                <div class="featured-panel mt-4">
+                    <div class="panel-header featured-header">
+                        <i class="bi bi-star-fill"></i>
+                        <h5>Featured Links</h5>
+                    </div>
+                    <div class="featured-list-modern">
                         {% for link in featured_links %}
-                        <a href="{{ link.url }}" class="featured-item" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
-                            <i class="bi bi-{{ link.icon|default:'link' }}"></i>
-                            <span>{{ link.title }}</span>
+                        <a href="{{ link.url }}" class="featured-card" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
+                            <div class="featured-icon">
+                                <i class="bi bi-{{ link.icon|default:'link' }}"></i>
+                            </div>
+                            <div class="featured-info">
+                                <h6>{{ link.title }}</h6>
+                                {% if link.description %}
+                                <p>{{ link.description|truncatechars:40 }}</p>
+                                {% endif %}
+                            </div>
+                            <i class="bi bi-chevron-right"></i>
                         </a>
                         {% endfor %}
                     </div>
@@ -79,63 +127,77 @@
                 {% endif %}
             </div>
             
-            <!-- Links List -->
+            <!-- Links Grid - Unique Card Design -->
             <div class="col-lg-9" data-aos="fade-left">
-                <div class="links-list">
-                    <!-- Results Info -->
-                    <div class="results-info mb-4">
-                        <h5>Showing {{ links.count }} results</h5>
-                        {% if search_query %}
-                            <p>Search results for: "{{ search_query }}"</p>
-                        {% endif %}
+                <!-- Results Header -->
+                <div class="results-header mb-4">
+                    <div class="results-info">
+                        <h3><i class="bi bi-link-45deg"></i> Discover Resources</h3>
+                        <p>Showing <strong>{{ links.count }}</strong> of <strong>{{ total_links }}</strong> total links</p>
                     </div>
-                    
-                    <!-- Links Grid -->
-                    <div class="row g-4">
-                        {% for link in links %}
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}">
-                            <div class="link-card">
-                                <div class="link-card-header">
-                                    <div class="link-icon">
-                                        <i class="bi bi-{{ link.icon|default:'link-45deg' }}"></i>
-                                    </div>
-                                    <div class="link-title">
-                                        <h3>{{ link.title }}</h3>
-                                        {% if link.is_featured %}
-                                            <span class="featured-badge">Featured</span>
-                                        {% endif %}
-                                    </div>
+                    {% if search_query %}
+                    <div class="search-tag">
+                        <i class="bi bi-search"></i> "{{ search_query }}"
+                        <a href="{% pageurl page %}" class="clear-search"><i class="bi bi-x-lg"></i></a>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Links Grid -->
+                <div class="links-grid-modern">
+                    {% for link in links %}
+                    <div class="link-tile" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}">
+                        <div class="link-tile-content">
+                            <div class="link-tile-header">
+                                <div class="link-icon-large">
+                                    <i class="bi bi-{{ link.icon|default:'link-45deg' }}"></i>
                                 </div>
-                                
-                                {% if link.description %}
-                                <p class="link-description">{{ link.description }}</p>
-                                {% endif %}
-                                
-                                <div class="link-meta">
-                                    {% if link.category %}
-                                    <span class="link-category">
-                                        <i class="bi bi-{{ link.category.icon }}"></i> {{ link.category.name }}
+                                <div class="link-tile-title">
+                                    <h4>{{ link.title }}</h4>
+                                    {% if link.is_featured %}
+                                    <span class="featured-tag">
+                                        <i class="bi bi-star-fill"></i> Featured
                                     </span>
                                     {% endif %}
                                 </div>
-                                
-                                <div class="link-footer">
-                                    <a href="{{ link.url }}" class="btn-link" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
-                                        Visit Link <i class="bi bi-box-arrow-up-right ms-2"></i>
-                                    </a>
-                                </div>
+                            </div>
+                            
+                            {% if link.description %}
+                            <p class="link-tile-description">{{ link.description }}</p>
+                            {% endif %}
+                            
+                            <div class="link-tile-meta">
+                                {% if link.category %}
+                                <span class="meta-category">
+                                    <i class="bi bi-{{ link.category.icon }}"></i> {{ link.category.name }}
+                                </span>
+                                {% endif %}
+                                <span class="meta-domain">
+                                    <i class="bi bi-globe2"></i> 
+                                    {% if link.url %}
+                                        {{ link.url|cut:"https://"|cut:"http://"|cut:"www."|truncatechars:20 }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            
+                            <div class="link-tile-footer">
+                                <a href="{{ link.url }}" class="btn-visit" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
+                                    <span>Visit Resource</span>
+                                    <i class="bi bi-box-arrow-up-right"></i>
+                                </a>
+                                <button class="btn-bookmark" title="Save for later">
+                                    <i class="bi bi-bookmark"></i>
+                                </button>
                             </div>
                         </div>
-                        {% empty %}
-                        <div class="col-12">
-                            <div class="no-results text-center py-5">
-                                <i class="bi bi-emoji-frown display-1 text-muted"></i>
-                                <h4 class="mt-4">No links found</h4>
-                                <p class="text-muted">Try adjusting your search or filter criteria</p>
-                            </div>
-                        </div>
-                        {% endfor %}
                     </div>
+                    {% empty %}
+                    <div class="empty-state">
+                        <i class="bi bi-link-45deg"></i>
+                        <h4>No Links Found</h4>
+                        <p>We couldn't find any links matching your criteria. Try adjusting your search or filter.</p>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
