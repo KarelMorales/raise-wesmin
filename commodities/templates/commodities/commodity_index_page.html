@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-commodities-page{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Dynamic category colors */
+    .category-badge-agriculture { background: #4CAF50; }
+    .category-badge-aquatic { background: #2196F3; }
+    .category-badge-natural-resources { background: #FF9800; }
+    .category-badge-default { background: #1B5E20; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section - ENLARGED to include everything -->
+    <div class="commodities-hero">
+        {% if page.hero_background %}
+            {% image page.hero_background fill-1920x800 as hero_img %}
+            <div class="hero-bg" style="background-image: url('{{ hero_img.url }}');"></div>
+        {% endif %}
+        <div class="hero-overlay">
+            <div class="container">
+                <!-- Hero Content -->
+                <div class="row">
+                    <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
+                        <h1 class="commodities-hero-title">{{ page.hero_title }}</h1>
+                        <p class="commodities-hero-subtitle">{{ page.hero_subtitle }}</p>
+                        
+                        <!-- Search Bar - Inside Green -->
+                        <div class="search-box-modern">
+                            <i class="bi bi-search"></i>
+                            <input type="text" name="q" placeholder="Search commodities..." value="{{ search_query|default:'' }}">
+                            <button type="submit">Find Commodities</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Pills - Inside Green -->
+                <div class="category-pills-wrapper" data-aos="fade-up">
+                    <a href="{% pageurl page %}?category=all" class="category-pill {% if current_category == 'all' %}active{% endif %}">
+                        <i class="bi bi-grid"></i>
+                        <span>All Commodities</span>
+                        <span class="pill-count">{{ total_commodities }}</span>
+                    </a>
+                    
+                    {% for category in categories %}
+                    <a href="{% pageurl page %}?category={{ category.slug }}" class="category-pill {% if current_category == category.slug %}active{% endif %}">
+                        <i class="bi bi-{{ category.icon }}"></i>
+                        <span>{{ category.name }}</span>
+                        <span class="pill-count">{{ category.commodities.count }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+
+                <!-- Stats Cards - Inside Green -->
+                <div class="stats-wrapper" data-aos="fade-up">
+                    <div class="stat-card">
+                        <div class="stat-number">{{ total_commodities }}</div>
+                        <div class="stat-label">TOTAL COMMODITIES</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">{{ categories|length }}</div>
+                        <div class="stat-label">CATEGORIES</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">{{ featured_commodities|length }}</div>
+                        <div class="stat-label">FEATURED</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content - Commodities Grid (White Section) -->
+    <div class="container my-5 py-4">
+        <!-- Results Info -->
+        <div class="results-info mb-4">
+            <h3>Discover Our Commodities</h3>
+            <p>Showing {{ commodities|length }} of {{ total_commodities }} total commodities</p>
+        </div>
+        
+        <!-- Commodities Grid -->
+        <div class="commodities-grid">
+            {% for commodity in commodities %}
+            <div class="commodity-card">
+                <div class="card-image-wrapper">
+                    {% if commodity.main_image %}
+                        {% image commodity.main_image fill-400x250 as card_img %}
+                        <img src="{{ card_img.url }}" alt="{{ commodity.name }}" class="card-image">
+                    {% else %}
+                        <div class="card-image-placeholder">
+                            <i class="bi bi-{{ commodity.category.icon|default:'flower1' }}"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Category Badge -->
+                    {% if commodity.category %}
+                        <span class="category-badge category-badge-{{ commodity.category.slug|default:'default' }}">
+                            <i class="bi bi-{{ commodity.category.icon }}"></i> {{ commodity.category.name }}
+                        </span>
+                    {% endif %}
+                    
+                    <!-- Featured Badge -->
+                    {% if commodity.is_featured %}
+                    <span class="featured-badge">
+                        <i class="bi bi-star-fill"></i> Featured
+                    </span>
+                    {% endif %}
+                </div>
+                
+                <div class="card-content">
+                    <h4 class="commodity-name">{{ commodity.name }}</h4>
+                    {% if commodity.scientific_name %}
+                    <p class="scientific-name"><em>{{ commodity.scientific_name }}</em></p>
+                    {% endif %}
+                    
+                    <p class="commodity-summary">{{ commodity.summary|truncatechars:100 }}</p>
+                    
+                    <div class="commodity-tags">
+                        {% if commodity.growing_seasons %}
+                        <span class="tag">
+                            <i class="bi bi-calendar3"></i> {{ commodity.growing_seasons }}
+                        </span>
+                        {% endif %}
+                        
+                        {% if commodity.market_value %}
+                        <span class="tag">
+                            <i class="bi bi-coin"></i> {{ commodity.market_value }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-footer">
+                        <span class="resource-count">
+                            <i class="bi bi-files"></i> {{ commodity.resource_count }} Resources
+                        </span>
+                        <a href="#" class="btn-explore">
+                            Explore <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-results">
+                <i class="bi bi-emoji-frown"></i>
+                <h4>No commodities found</h4>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Featured Commodities Section -->
+    {% if featured_commodities %}
+    <div class="featured-section">
+        <div class="container">
+            <div class="section-header text-center mb-4">
+                <h2>Featured Commodities</h2>
+                <p>Hand-picked commodities for you to explore</p>
+            </div>
+            
+            <div class="featured-grid">
+                {% for commodity in featured_commodities %}
+                <div class="featured-item">
+                    {% if commodity.icon_image %}
+                        {% image commodity.icon_image fill-80x80 as icon_img %}
+                        <img src="{{ icon_img.url }}" alt="{{ commodity.name }}" class="featured-icon">
+                    {% else %}
+                        <div class="featured-icon-placeholder">
+                            <i class="bi bi-{{ commodity.category.icon|default:'star' }}"></i>
+                        </div>
+                    {% endif %}
+                    <div class="featured-content">
+                        <h5>{{ commodity.name }}</h5>
+                        <p>{{ commodity.summary|truncatechars:60 }}</p>
+                        <a href="#" class="featured-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

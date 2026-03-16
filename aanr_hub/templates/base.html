@@ -2469,6 +2469,544 @@
         padding: 1rem;
     }
 }
+
+/* ===== COMMODITIES PAGE - ENLARGED HERO DESIGN ===== */
+
+/* Hero Section - ENLARGED */
+.commodities-hero {
+    position: relative;
+    padding: 0;
+    background-color: var(--primary-dark);
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+}
+
+.hero-overlay {
+    position: relative;
+    width: 100%;
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(10,61,10,0.98) 0%, rgba(27,94,32,0.98) 100%);
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+}
+
+.commodities-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.commodities-hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+/* Search Box - Inside Green */
+.search-box-modern {
+    background: white;
+    border-radius: 60px;
+    padding: 0.3rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.search-box-modern i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-left: 1.5rem;
+}
+
+.search-box-modern input {
+    flex: 1;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    outline: none;
+    background: transparent;
+}
+
+.search-box-modern button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 60px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-box-modern button:hover {
+    background: var(--primary-dark);
+    transform: scale(1.02);
+}
+
+/* Category Pills - Inside Green */
+.category-pills-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0 3rem;
+}
+
+.category-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 2rem;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 60px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.category-pill i {
+    font-size: 1.2rem;
+    color: white;
+}
+
+.category-pill:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-3px);
+}
+
+.category-pill.active {
+    background: white;
+    color: var(--primary-dark);
+}
+
+.category-pill.active i {
+    color: var(--primary-color);
+}
+
+.pill-count {
+    background: rgba(0,0,0,0.2);
+    padding: 0.2rem 0.8rem;
+    border-radius: 60px;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.category-pill.active .pill-count {
+    background: rgba(27,94,32,0.1);
+    color: var(--primary-dark);
+}
+
+/* Stats Cards - Inside Green */
+.stats-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0 1rem;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 2rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-5px);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/* Results Info - White Section */
+.results-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-bg);
+}
+
+.results-info h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 0;
+}
+
+.results-info p {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Commodities Grid */
+.commodities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Commodity Card */
+.commodity-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.commodity-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px rgba(27,94,32,0.1);
+}
+
+/* Card Image */
+.card-image-wrapper {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    background: #f0f7f0;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.commodity-card:hover .card-image {
+    transform: scale(1.1);
+}
+
+.card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--primary-color);
+    background: #f0f7f0;
+}
+
+/* Category Badge */
+.category-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.category-badge i {
+    margin-right: 0.3rem;
+}
+
+/* Featured Badge */
+.featured-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--accent-color);
+    color: var(--primary-dark);
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Card Content */
+.card-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.commodity-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.3rem;
+}
+
+.scientific-name {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+}
+
+.commodity-summary {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+/* Tags */
+.commodity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #f5f9f5;
+    padding: 0.3rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    color: var(--text-dark);
+}
+
+.tag i {
+    color: var(--primary-color);
+}
+
+/* Card Footer */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #eef5ee;
+}
+
+.resource-count {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+.resource-count i {
+    color: var(--primary-color);
+}
+
+.btn-explore {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.3s ease;
+}
+
+.btn-explore:hover {
+    color: var(--accent-color);
+    gap: 0.6rem;
+}
+
+/* Featured Section */
+.featured-section {
+    background: linear-gradient(135deg, #f8fbf8 0%, #eef5ee 100%);
+    padding: 4rem 0;
+    margin-top: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.featured-item {
+    background: white;
+    border-radius: 16px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.featured-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(27,94,32,0.1);
+}
+
+.featured-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.featured-icon-placeholder {
+    width: 60px;
+    height: 60px;
+    background: #e8f0e8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.featured-content h5 {
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+}
+
+.featured-content p {
+    color: var(--text-light);
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+}
+
+.featured-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    grid-column: 1 / -1;
+}
+
+.no-results i {
+    font-size: 4rem;
+    color: var(--text-light);
+    opacity: 0.3;
+    margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .commodities-hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-overlay {
+        padding: 3rem 0;
+        min-height: auto;
+    }
+    
+    .search-box-modern {
+        flex-direction: column;
+        background: white;
+        padding: 0.5rem;
+    }
+    
+    .search-box-modern input {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    
+    .search-box-modern button {
+        width: 100%;
+    }
+    
+    .stats-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .results-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .commodities-grid {
+        grid-template-columns: 1fr;
+    }
+}
     </style>
     
 
