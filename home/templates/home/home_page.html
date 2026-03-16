@@ -4,25 +4,42 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    <!-- Hero Section with Full Width Image -->
-    <div class="hero-section position-relative">
-        <img src="{% static 'images/welcome-image.jpg' %}" alt="Welcome" class="welcome-image-full">
+    <!-- Hero Section - Image Fully Visible -->
+    <div class="home-hero">
+        <img src="{% static 'images/welcome-image.jpg' %}" alt="Welcome" class="hero-background">
         <div class="hero-overlay">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
-                        <h1 class="hero-title">AANR Knowledge Hub</h1>
-                        <p class="hero-subtitle">Empowering communities through knowledge sharing and technological advancement in Agriculture, Aquatic, and Natural Resources sectors.</p>
-                        <a href="/knowledge/" class="btn-get-started">
-                            Get Started <i class="bi bi-arrow-right ms-2"></i>
-                        </a>
+                    <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
+                        <div class="hero-content-box">
+                            <div class="hero-badge mb-4">
+                                <span class="badge-custom">WELCOME TO</span>
+                            </div>
+                            
+                            <h1 class="home-hero-title">
+                                AANR Knowledge Hub
+                                <span>Empowering Communities</span>
+                            </h1>
+                            
+                            <p class="home-hero-subtitle">Empowering communities through knowledge sharing and technological advancement in Agriculture, Aquatic, and Natural Resources sectors.</p>
+                            
+                            <a href="/knowledge/" class="home-cta-button">
+                                Get Started <i class="bi bi-arrow-right"></i>
+                            </a>
+                            
+                            <div class="quick-stats mt-5">
+                                <span class="stat-badge"><i class="bi bi-files"></i> 100+ Resources</span>
+                                <span class="stat-badge"><i class="bi bi-people"></i> 500+ Members</span>
+                                <span class="stat-badge"><i class="bi bi-graph-up"></i> 50+ Commodities</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Features Section -->
+    <!-- Features Section - REDESIGNED -->
     <div class="container my-5 py-5">
         <div class="text-center mb-5" data-aos="fade-up">
             <h2 class="section-title">Knowledge Hub Features</h2>
@@ -33,13 +50,13 @@
             <!-- Knowledge Resources -->
             <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="feature-card">
-                    <div class="feature-icon">
+                    <div class="feature-icon-wrapper">
                         <i class="bi bi-book"></i>
                     </div>
                     <h3>Knowledge Resource</h3>
                     <p>Access research papers, case studies, and technical guides on AANR technologies.</p>
                     <a href="/knowledge/" class="feature-link">
-                        Browse Resources <i class="bi bi-arrow-right ms-2"></i>
+                        Browse Resources <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -47,13 +64,13 @@
             <!-- Community Forum -->
             <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="feature-card">
-                    <div class="feature-icon">
+                    <div class="feature-icon-wrapper">
                         <i class="bi bi-chat-dots"></i>
                     </div>
                     <h3>Community Forum</h3>
                     <p>Connect with experts and practitioners to discuss challenges and share insights.</p>
                     <a href="/forum/" class="feature-link">
-                        Join Discussion <i class="bi bi-arrow-right ms-2"></i>
+                        Join Discussion <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -61,13 +78,13 @@
             <!-- Commodities -->
             <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="feature-card">
-                    <div class="feature-icon">
+                    <div class="feature-icon-wrapper">
                         <i class="bi bi-graph-up"></i>
                     </div>
                     <h3>Commodities</h3>
                     <p>Stay updated with market trends, commodity prices, and economic analyses.</p>
                     <a href="/commodities/" class="feature-link">
-                        View Commodities <i class="bi bi-arrow-right ms-2"></i>
+                        View Commodities <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -75,13 +92,13 @@
             <!-- FAQs -->
             <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="feature-card">
-                    <div class="feature-icon">
+                    <div class="feature-icon-wrapper">
                         <i class="bi bi-question-circle"></i>
                     </div>
                     <h3>Frequently Asked Questions</h3>
                     <p>Find quick answers to common questions about our platform and services.</p>
                     <a href="/faqs/" class="feature-link">
-                        View FAQs <i class="bi bi-arrow-right ms-2"></i>
+                        View FAQs <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -89,60 +106,62 @@
             <!-- Useful Links -->
             <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
                 <div class="feature-card">
-                    <div class="feature-icon">
+                    <div class="feature-icon-wrapper">
                         <i class="bi bi-link-45deg"></i>
                     </div>
                     <h3>Useful Links</h3>
                     <p>Curated collection of external resources and partner organizations.</p>
                     <a href="/useful-links/" class="feature-link">
-                        Explore Links <i class="bi bi-arrow-right ms-2"></i>
+                        Explore Links <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Stats Section -->
-    <div class="stats-section" data-aos="fade-up">
+    <!-- Stats Section - REDESIGNED like Commodities -->
+    <div class="home-stats-section">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-6 mb-4 mb-md-0" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="stat-item">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Knowledge Resources</div>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card-modern">
+                    <div class="stat-icon"><i class="bi bi-files"></i></div>
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Knowledge Resources</div>
                 </div>
-                <div class="col-md-3 col-6 mb-4 mb-md-0" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="stat-item">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Community Members</div>
-                    </div>
+                <div class="stat-card-modern">
+                    <div class="stat-icon"><i class="bi bi-people"></i></div>
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Community Members</div>
                 </div>
-                <div class="col-md-3 col-6 mb-4 mb-md-0" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Commodities Tracked</div>
-                    </div>
+                <div class="stat-card-modern">
+                    <div class="stat-icon"><i class="bi bi-graph-up"></i></div>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Commodities Tracked</div>
                 </div>
-                <div class="col-md-3 col-6 mb-4 mb-md-0" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Expert Support</div>
-                    </div>
+                <div class="stat-card-modern">
+                    <div class="stat-icon"><i class="bi bi-headset"></i></div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Expert Support</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- CTA Section -->
-    <div class="container">
-        <div class="cta-section text-center" data-aos="fade-up">
-            <div class="container">
-                <h2 class="cta-title">Ready to explore?</h2>
-                <p class="cta-text">Join our community and access thousands of resources today.</p>
-                <a href="/knowledge/" class="btn-cta">
-                    Get Started Now <i class="bi bi-arrow-right ms-2"></i>
-                </a>
+    <!-- CTA Section - REDESIGNED -->
+    <div class="home-cta-section">
+        <div class="container">
+            <div class="cta-card" data-aos="zoom-in">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 text-center text-lg-start">
+                        <h2 class="cta-title">Ready to explore?</h2>
+                        <p class="cta-text">Join our community and access thousands of resources today.</p>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end">
+                        <a href="/knowledge/" class="cta-button">
+                            Get Started Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
