@@ -4,122 +4,163 @@
 {% block body_class %}template-useful-links-page{% endblock %}
 
 {% block content %}
-    <!-- Hero Section - ENLARGED like Commodities -->
-    <div class="useful-links-hero">
-        <div class="hero-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
-                        <!-- Badge -->
-                        <div class="hero-badge mb-4">
-                            <span class="badge-custom">RESOURCE HUB</span>
+    <!-- Hero Section - Clean Green (Like About Page) -->
+<div class="links-hero-new">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
+                <!-- Modern Badge -->
+                <div class="hero-badge-new">
+                    <span class="badge-text">RESOURCE HUB</span>
+                </div>
+                
+                <!-- Title -->
+                <h1 class="links-hero-title-new">
+                    {{ page.featured_title }}
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="links-hero-subtitle-new">{{ page.featured_subtitle }}</p>
+                
+                <!-- Modern Search Bar -->
+                <div class="search-container">
+                    <form method="get" action="{% pageurl page %}">
+                        <div class="search-box-new">
+                            <i class="bi bi-search"></i>
+                            <input type="text" name="q" placeholder="Search resources, tools, documents..." value="{{ search_query|default:'' }}">
+                            <button type="submit">
+                                <span>Search</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
                         </div>
-                        
-                        <!-- Title -->
-                        <h1 class="hero-title">{{ page.featured_title }}</h1>
-                        
-                        <!-- Subtitle -->
-                        <p class="hero-subtitle">{{ page.featured_subtitle }}</p>
-                        
-                        <!-- Search Bar - Modern Design -->
-                        <div class="search-wrapper mt-5">
-                            <form method="get" action="{% pageurl page %}">
-                                <div class="search-box-modern">
-                                    <i class="bi bi-search"></i>
-                                    <input type="text" name="q" placeholder="Search for resources, tools, websites..." value="{{ search_query|default:'' }}">
-                                    <button type="submit">Find Links</button>
-                                </div>
-                            </form>
+                    </form>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-item-new">
+                        <div class="stat-icon">
+                            <i class="bi bi-link-45deg"></i>
                         </div>
-                        
-                        <!-- Stats Card -->
-                        <div class="stats-card mt-5">
-                            <div class="stat-item">
-                                <span class="stat-number">{{ total_links }}</span>
-                                <span class="stat-label">Total Links</span>
-                            </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-item">
-                                <span class="stat-number">{{ categories.count }}</span>
-                                <span class="stat-label">Categories</span>
-                            </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-item">
-                                <span class="stat-number">{{ featured_links.count }}</span>
-                                <span class="stat-label">Featured</span>
-                            </div>
+                        <div class="stat-content">
+                            <span class="stat-number">{{ total_links }}</span>
+                            <span class="stat-label">Total Resources</span>
+                        </div>
+                    </div>
+                    <div class="stat-item-new">
+                        <div class="stat-icon">
+                            <i class="bi bi-tags"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number">{{ categories.count }}</span>
+                            <span class="stat-label">Categories</span>
+                        </div>
+                    </div>
+                    <div class="stat-item-new">
+                        <div class="stat-icon">
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number">{{ featured_links.count }}</span>
+                            <span class="stat-label">Featured</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
     <!-- Main Content -->
     <div class="container my-5 py-4">
         <div class="row">
-            <!-- Sidebar with Categories - Unique Design -->
+            <!-- Sidebar - Modern Filter Panel -->
             <div class="col-lg-3 mb-4" data-aos="fade-right">
-                <div class="categories-panel">
-                    <div class="panel-header">
-                        <i class="bi bi-funnel-fill"></i>
-                        <h5>Filter by Category</h5>
+                <div class="filter-panel-modern">
+                    <div class="filter-header">
+                        <i class="bi bi-sliders2"></i>
+                        <h4>Filter Resources</h4>
+                        <span class="filter-badge">{{ total_links }} total</span>
                     </div>
                     
-                    <div class="categories-list-modern">
-                        <a href="{% pageurl page %}?category=all" class="category-chip {% if current_category == 'all' %}active{% endif %}">
-                            <i class="bi bi-grid-3x3-gap-fill"></i>
-                            <span>All Links</span>
-                            <span class="chip-count">{{ total_links }}</span>
-                        </a>
-                        
-                        {% for category in categories %}
-                        <a href="{% pageurl page %}?category={{ category.slug }}" class="category-chip {% if current_category == category.slug %}active{% endif %}">
-                            <i class="bi bi-{{ category.icon }}"></i>
-                            <span>{{ category.name }}</span>
-                            <span class="chip-count">{{ category.links.count }}</span>
-                        </a>
-                        {% endfor %}
+                    <!-- Categories Section -->
+                    <div class="filter-section">
+                        <h5 class="filter-title">
+                            <i class="bi bi-tags"></i>
+                            Categories
+                        </h5>
+                        <div class="filter-options">
+                            <a href="{% pageurl page %}?category=all" class="filter-option {% if current_category == 'all' %}active{% endif %}">
+                                <i class="bi bi-grid"></i>
+                                <span>All Resources</span>
+                                <span class="option-count">{{ total_links }}</span>
+                            </a>
+                            
+                            {% for category in categories %}
+                            <a href="{% pageurl page %}?category={{ category.slug }}" class="filter-option {% if current_category == category.slug %}active{% endif %}">
+                                <i class="bi bi-{{ category.icon }}"></i>
+                                <span>{{ category.name }}</span>
+                                <span class="option-count">{{ category.links.count }}</span>
+                            </a>
+                            {% endfor %}
+                        </div>
                     </div>
                     
-                    <!-- Quick Actions -->
-                    <div class="quick-actions mt-4">
-                        <h5 class="actions-title">Quick Actions</h5>
-                        <a href="#" class="action-item">
-                            <i class="bi bi-plus-circle"></i>
-                            <span>Suggest a Link</span>
-                        </a>
-                        <a href="#" class="action-item">
-                            <i class="bi bi-star"></i>
-                            <span>Most Popular</span>
-                        </a>
-                        <a href="#" class="action-item">
-                            <i class="bi bi-clock-history"></i>
-                            <span>Recently Added</span>
-                        </a>
+                    <!-- Resource Type Filter -->
+                    <div class="filter-section">
+                        <h5 class="filter-title">
+                            <i class="bi bi-file-earmark"></i>
+                            Resource Type
+                        </h5>
+                        <div class="filter-options">
+                            <select class="filter-select" onchange="location = this.value;">
+                                <option value="{% pageurl page %}?category={{ current_category }}">All Types</option>
+                                <option value="{% pageurl page %}?category={{ current_category }}&type=government">Government</option>
+                                <option value="{% pageurl page %}?category={{ current_category }}&type=educational">Educational</option>
+                                <option value="{% pageurl page %}?category={{ current_category }}&type=research">Research</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Filters -->
+                    <div class="quick-filters">
+                        <h5 class="filter-title">
+                            <i class="bi bi-lightning"></i>
+                            Quick Filters
+                        </h5>
+                        <div class="quick-buttons">
+                            <a href="#" class="quick-btn">
+                                <i class="bi bi-star"></i> Most Popular
+                            </a>
+                            <a href="#" class="quick-btn">
+                                <i class="bi bi-clock"></i> Recently Added
+                            </a>
+                            <a href="#" class="quick-btn">
+                                <i class="bi bi-eye"></i> Most Viewed
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Featured Links Card -->
+                <!-- Featured Resources Panel -->
                 {% if featured_links %}
-                <div class="featured-panel mt-4">
-                    <div class="panel-header featured-header">
-                        <i class="bi bi-star-fill"></i>
-                        <h5>Featured Links</h5>
+                <div class="featured-panel-modern mt-4">
+                    <div class="featured-header">
+                        <i class="bi bi-stars"></i>
+                        <h5>Featured Resources</h5>
                     </div>
-                    <div class="featured-list-modern">
+                    <div class="featured-list">
                         {% for link in featured_links %}
-                        <a href="{{ link.url }}" class="featured-card" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
-                            <div class="featured-icon">
+                        <a href="{{ link.url }}" class="featured-item-modern" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
+                            <div class="featured-icon-wrapper">
                                 <i class="bi bi-{{ link.icon|default:'link' }}"></i>
                             </div>
-                            <div class="featured-info">
+                            <div class="featured-details">
                                 <h6>{{ link.title }}</h6>
                                 {% if link.description %}
-                                <p>{{ link.description|truncatechars:40 }}</p>
+                                <p>{{ link.description|truncatechars:35 }}</p>
                                 {% endif %}
                             </div>
-                            <i class="bi bi-chevron-right"></i>
+                            <i class="bi bi-arrow-right-short"></i>
                         </a>
                         {% endfor %}
                     </div>
@@ -127,77 +168,112 @@
                 {% endif %}
             </div>
             
-            <!-- Links Grid - Unique Card Design -->
+            <!-- Main Content - Resources Grid -->
             <div class="col-lg-9" data-aos="fade-left">
                 <!-- Results Header -->
-                <div class="results-header mb-4">
-                    <div class="results-info">
-                        <h3><i class="bi bi-link-45deg"></i> Discover Resources</h3>
-                        <p>Showing <strong>{{ links.count }}</strong> of <strong>{{ total_links }}</strong> total links</p>
+                <div class="results-header-modern">
+                    <div class="results-info-modern">
+                        <h2><i class="bi bi-grid-3x3"></i> Resource Library</h2>
+                        <div class="results-meta">
+                            <span class="result-count">{{ links.count }} results</span>
+                            <span class="result-divider">•</span>
+                            <span class="total-count">{{ total_links }} total resources</span>
+                        </div>
                     </div>
-                    {% if search_query %}
-                    <div class="search-tag">
-                        <i class="bi bi-search"></i> "{{ search_query }}"
-                        <a href="{% pageurl page %}" class="clear-search"><i class="bi bi-x-lg"></i></a>
+                    <div class="results-actions">
+                        <select class="sort-select-modern">
+                            <option>Most Relevant</option>
+                            <option>Newest First</option>
+                            <option>Oldest First</option>
+                            <option>A-Z</option>
+                        </select>
+                        <div class="view-toggle">
+                            <button class="view-btn active"><i class="bi bi-grid-3x3"></i></button>
+                            <button class="view-btn"><i class="bi bi-list"></i></button>
+                        </div>
                     </div>
-                    {% endif %}
                 </div>
                 
-                <!-- Links Grid -->
-                <div class="links-grid-modern">
+                {% if search_query %}
+                <div class="search-results-info">
+                    <i class="bi bi-search"></i>
+                    <span>Search results for: <strong>"{{ search_query }}"</strong></span>
+                    <a href="{% pageurl page %}" class="clear-search">
+                        <i class="bi bi-x"></i> Clear
+                    </a>
+                </div>
+                {% endif %}
+                
+                <!-- Resources Grid -->
+                <div class="resources-grid-modern">
                     {% for link in links %}
-                    <div class="link-tile" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}">
-                        <div class="link-tile-content">
-                            <div class="link-tile-header">
-                                <div class="link-icon-large">
-                                    <i class="bi bi-{{ link.icon|default:'link-45deg' }}"></i>
-                                </div>
-                                <div class="link-tile-title">
-                                    <h4>{{ link.title }}</h4>
-                                    {% if link.is_featured %}
-                                    <span class="featured-tag">
-                                        <i class="bi bi-star-fill"></i> Featured
-                                    </span>
-                                    {% endif %}
-                                </div>
+                    <div class="resource-card-modern" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'30' }}">
+                        {% if link.is_featured %}
+                        <div class="resource-badge featured-badge">
+                            <i class="bi bi-star-fill"></i> Featured
+                        </div>
+                        {% endif %}
+                        
+                        <div class="resource-header">
+                            <div class="resource-icon">
+                                <i class="bi bi-{{ link.icon|default:'link' }}"></i>
                             </div>
-                            
-                            {% if link.description %}
-                            <p class="link-tile-description">{{ link.description }}</p>
+                            <h3 class="resource-title">{{ link.title }}</h3>
+                        </div>
+                        
+                        {% if link.description %}
+                        <p class="resource-description">{{ link.description|truncatechars:80 }}</p>
+                        {% endif %}
+                        
+                        <div class="resource-meta">
+                            {% if link.category %}
+                            <span class="meta-category">
+                                <i class="bi bi-{{ link.category.icon }}"></i> {{ link.category.name }}
+                            </span>
                             {% endif %}
-                            
-                            <div class="link-tile-meta">
-                                {% if link.category %}
-                                <span class="meta-category">
-                                    <i class="bi bi-{{ link.category.icon }}"></i> {{ link.category.name }}
-                                </span>
+                            <span class="meta-domain">
+                                <i class="bi bi-globe2"></i>
+                                {% if link.url %}
+                                    {{ link.url|cut:"https://"|cut:"http://"|cut:"www."|truncatechars:20 }}
                                 {% endif %}
-                                <span class="meta-domain">
-                                    <i class="bi bi-globe2"></i> 
-                                    {% if link.url %}
-                                        {{ link.url|cut:"https://"|cut:"http://"|cut:"www."|truncatechars:20 }}
-                                    {% endif %}
-                                </span>
-                            </div>
-                            
-                            <div class="link-tile-footer">
-                                <a href="{{ link.url }}" class="btn-visit" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
-                                    <span>Visit Resource</span>
-                                    <i class="bi bi-box-arrow-up-right"></i>
-                                </a>
-                                <button class="btn-bookmark" title="Save for later">
-                                    <i class="bi bi-bookmark"></i>
-                                </button>
-                            </div>
+                            </span>
+                        </div>
+                        
+                        <div class="resource-footer">
+                            <a href="{{ link.url }}" class="resource-link" {% if link.opens_in_new_tab %}target="_blank"{% endif %}>
+                                <span>Access Resource</span>
+                                <i class="bi bi-arrow-up-right-circle"></i>
+                            </a>
+                            <button class="resource-save" title="Save for later">
+                                <i class="bi bi-bookmark-plus"></i>
+                            </button>
                         </div>
                     </div>
                     {% empty %}
-                    <div class="empty-state">
+                    <div class="empty-state-modern">
                         <i class="bi bi-link-45deg"></i>
-                        <h4>No Links Found</h4>
-                        <p>We couldn't find any links matching your criteria. Try adjusting your search or filter.</p>
+                        <h3>No Resources Found</h3>
+                        <p>We couldn't find any resources matching your criteria. Try adjusting your filters or search terms.</p>
+                        <a href="{% pageurl page %}" class="reset-btn">
+                            <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+                        </a>
                     </div>
                     {% endfor %}
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination-modern">
+                    <a href="#" class="page-prev disabled">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                    <a href="#" class="page-number active">1</a>
+                    <a href="#" class="page-number">2</a>
+                    <a href="#" class="page-number">3</a>
+                    <span class="page-dots">...</span>
+                    <a href="#" class="page-number">8</a>
+                    <a href="#" class="page-next">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
