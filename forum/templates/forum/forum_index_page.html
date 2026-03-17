@@ -4,42 +4,67 @@
 {% block body_class %}template-forum-page{% endblock %}
 
 {% block content %}
-    <!-- Hero Section - EXACTLY like Commodities page -->
-    <div class="forum-hero">
-        <div class="hero-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
-                        <!-- Badge (like Commodities has "WELCOME TO") -->
-                        <div class="hero-badge mb-4">
-                            <span class="badge-custom">COMMUNITY FORUM</span>
-                        </div>
-                        
-                        <!-- Title -->
-                        <h1 class="forum-hero-title">{{ page.hero_title }}</h1>
-                        
-                        <!-- Subtitle -->
-                        <p class="forum-hero-subtitle">{{ page.hero_subtitle }}</p>
-                        
-                        <!-- Action Buttons -->
-<div class="hero-actions mt-4">
-    <a href="#" class="btn-forum" data-bs-toggle="modal" data-bs-target="#newThreadModal">
-        <i class="bi bi-plus-circle me-2"></i>Start New Discussion
-    </a>
-</div>
-                        
-                        <!-- Stats (like Commodities has stats cards) -->
-                        <div class="stats-wrapper mt-5">
-                            <div class="stat-item">
+    <!-- Hero Section - Large & Straight (No Curves) -->
+    <div class="forum-hero-modern">
+        <!-- Decorative Elements (Subtle) -->
+        <div class="hero-particles"></div>
+        <div class="hero-circle-1"></div>
+        <div class="hero-circle-2"></div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
+                    <!-- Modern Badge -->
+                    <div class="hero-badge-modern">
+                        <span class="badge-text">COMMUNITY FORUM</span>
+                    </div>
+                    
+                    <!-- Title with Gradient -->
+                    <h1 class="forum-hero-title-modern">
+                        {{ page.hero_title }}
+                    </h1>
+                    
+                    <!-- Subtitle -->
+                    <p class="forum-hero-subtitle-modern">{{ page.hero_subtitle }}</p>
+                    
+                    <!-- Action Buttons - Smaller Green Button -->
+                    <div class="hero-actions-modern">
+                        <a href="#" class="btn-forum-small" data-bs-toggle="modal" data-bs-target="#newThreadModal">
+                            <i class="bi bi-plus-circle"></i>
+                            <span>Start New Discussion</span>
+                        </a>
+                        <a href="#recent-discussions" class="btn-outline-small">
+                            <i class="bi bi-arrow-down"></i>
+                            <span>Browse</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Stats Cards - Modern Design -->
+                    <div class="stats-grid-modern">
+                        <div class="stat-card-modern">
+                            <div class="stat-icon">
+                                <i class="bi bi-chat-dots"></i>
+                            </div>
+                            <div class="stat-content">
                                 <span class="stat-number">{{ total_threads }}</span>
                                 <span class="stat-label">Discussions</span>
                             </div>
-                            <div class="stat-item">
+                        </div>
+                        <div class="stat-card-modern">
+                            <div class="stat-icon">
+                                <i class="bi bi-tags"></i>
+                            </div>
+                            <div class="stat-content">
                                 <span class="stat-number">{{ categories.count }}</span>
                                 <span class="stat-label">Categories</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-number">150+</span>
+                        </div>
+                        <div class="stat-card-modern">
+                            <div class="stat-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number">0</span>
                                 <span class="stat-label">Active Users</span>
                             </div>
                         </div>
@@ -47,158 +72,272 @@
                 </div>
             </div>
         </div>
+        <!-- NO WAVE - Straight edges -->
     </div>
 
     <!-- Main Content -->
     <div class="container my-5 py-4" id="recent-discussions">
         <div class="row">
-            <!-- Left Sidebar - Categories -->
+            <!-- Left Sidebar - Modern Categories Panel -->
             <div class="col-lg-3 mb-4" data-aos="fade-right">
-                <div class="forum-sidebar">
-                    <div class="sidebar-header">
+                <div class="forum-sidebar-modern">
+                    <div class="sidebar-header-modern">
                         <i class="bi bi-diagram-3"></i>
                         <h4>Topics</h4>
+                        <span class="header-badge">{{ categories.count }}</span>
                     </div>
                     
-                    <div class="categories-list">
-                        <a href="{% pageurl page %}?category=all" class="category-item {% if current_category == 'all' %}active{% endif %}">
-                            <i class="bi bi-grid"></i>
-                            <span>All Discussions</span>
-                            <span class="category-count">{{ total_threads }}</span>
+                    <div class="categories-list-modern">
+                        <a href="{% pageurl page %}?category=all" class="category-item-modern {% if current_category == 'all' %}active{% endif %}">
+                            <div class="category-icon all-icon">
+                                <i class="bi bi-grid-3x3-gap-fill"></i>
+                            </div>
+                            <div class="category-info">
+                                <span class="category-name">All Discussions</span>
+                                <span class="category-count">{{ total_threads }} threads</span>
+                            </div>
+                            {% if current_category == 'all' %}
+                            <i class="bi bi-check-circle-fill check-icon"></i>
+                            {% endif %}
                         </a>
                         
                         {% for category in categories %}
-                        <a href="{% pageurl page %}?category={{ category.slug }}" class="category-item {% if current_category == category.slug %}active{% endif %}">
-                            <i class="bi bi-{{ category.icon }}"></i>
-                            <span>{{ category.name }}</span>
-                            <span class="category-count">{{ category.threads.count }}</span>
+                        <a href="{% pageurl page %}?category={{ category.slug }}" class="category-item-modern {% if current_category == category.slug %}active{% endif %}">
+                            <div class="category-icon cat-{{ forloop.counter0 }}">
+                                <i class="bi bi-{{ category.icon }}"></i>
+                            </div>
+                            <div class="category-info">
+                                <span class="category-name">{{ category.name }}</span>
+                                <span class="category-count">{{ category.threads.count }} threads</span>
+                            </div>
+                            {% if current_category == category.slug %}
+                            <i class="bi bi-check-circle-fill check-icon"></i>
+                            {% endif %}
                         </a>
                         {% endfor %}
                     </div>
                     
-                    <!-- Popular Tags -->
-                    <div class="popular-tags mt-4">
-                        <h5><i class="bi bi-tags"></i> Popular Tags</h5>
-                        <div class="tags-cloud">
-                            <span class="tag">#farming</span>
-                            <span class="tag">#organic</span>
-                            <span class="tag">#rice</span>
-                            <span class="tag">#fish</span>
-                            <span class="tag">#chicken</span>
-                            <span class="tag">#bamboo</span>
+                    <!-- Popular Tags Section -->
+                    <div class="popular-tags-modern">
+                        <h5 class="tags-title">
+                            <i class="bi bi-tags"></i> Popular Tags
+                        </h5>
+                        <div class="tags-cloud-modern">
+                            <a href="#" class="tag-modern">#farming</a>
+                            <a href="#" class="tag-modern">#organic</a>
+                            <a href="#" class="tag-modern">#rice</a>
+                            <a href="#" class="tag-modern">#fish</a>
+                            <a href="#" class="tag-modern">#chicken</a>
+                            <a href="#" class="tag-modern">#bamboo</a>
+                            <a href="#" class="tag-modern">#sustainable</a>
+                            <a href="#" class="tag-modern">#fisheries</a>
                         </div>
+                    </div>
+                    
+                    <!-- Community Guidelines -->
+                    <div class="guidelines-card">
+                        <i class="bi bi-info-circle"></i>
+                        <h6>Community Guidelines</h6>
+                        <p>Be respectful, stay on topic, and help others learn.</p>
+                        <a href="#">Read more <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
             
             <!-- Main Content - Threads -->
             <div class="col-lg-9" data-aos="fade-left">
-                <!-- Results Header -->
-                <div class="results-header mb-4">
-                    <h3>Recent Discussions</h3>
-                    <p>Showing <strong>{{ threads.count }}</strong> of <strong>{{ total_threads }}</strong> discussions</p>
+                <!-- Results Header with Sort Options -->
+                <div class="discussions-header-modern">
+                    <div class="header-left">
+                        <h2><i class="bi bi-chat-dots"></i> Recent Discussions</h2>
+                        <div class="results-meta">
+                            <span class="result-count">{{ threads.count }} results</span>
+                            <span class="result-divider">•</span>
+                            <span class="total-count">{{ total_threads }} total discussions</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="sort-dropdown">
+                            <i class="bi bi-arrow-down-up"></i>
+                            <select class="sort-select-modern">
+                                <option>Most Recent</option>
+                                <option>Most Popular</option>
+                                <option>Most Replies</option>
+                                <option>Unanswered</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Threads List -->
-                <div class="discussions-list">
+                <!-- Threads List - Modern Card Design -->
+                <div class="discussions-list-modern">
                     {% for thread in threads %}
-                    <div class="thread-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'30' }}">
-                        <div class="thread-header">
-                            <div class="thread-category">
-                                <span class="category-badge">
-                                    <i class="bi bi-{{ thread.category.icon }}"></i> {{ thread.category.name }}
-                                </span>
-                                {% if thread.is_pinned %}
-                                <span class="badge-pinned">
-                                    <i class="bi bi-pin-fill"></i> Pinned
-                                </span>
-                                {% endif %}
-                                {% if thread.is_closed %}
-                                <span class="badge-closed">
-                                    <i class="bi bi-lock-fill"></i> Closed
-                                </span>
-                                {% endif %}
-                            </div>
-                            <div class="thread-stats">
-                                <span><i class="bi bi-eye"></i> {{ thread.views }}</span>
-                                <span><i class="bi bi-chat"></i> {{ thread.reply_count }}</span>
-                            </div>
+                    <div class="thread-card-modern" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'30' }}">
+                        <!-- Vote Section -->
+                        <div class="thread-vote">
+                            <button class="vote-btn upvote">
+                                <i class="bi bi-chevron-up"></i>
+                            </button>
+                            <span class="vote-count">{{ thread.views|default:"24" }}</span>
+                            <button class="vote-btn downvote">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
                         </div>
                         
-                        <h3 class="thread-title">
-                            <a href="#">{{ thread.title }}</a>
-                        </h3>
-                        
-                        <div class="thread-content">
-                            {{ thread.content|richtext|truncatewords_html:40 }}
-                        </div>
-                        
-                        <div class="thread-footer">
-                            <div class="thread-meta">
-                                <span><i class="bi bi-person"></i> {{ thread.created_by_name|default:"Anonymous" }}</span>
-                                <span><i class="bi bi-clock"></i> {{ thread.created_at|timesince }} ago</span>
+                        <!-- Main Content -->
+                        <div class="thread-main">
+                            <div class="thread-header-modern">
+                                <div class="thread-badges">
+                                    <span class="category-badge-modern cat-{{ forloop.counter0 }}">
+                                        <i class="bi bi-{{ thread.category.icon }}"></i> {{ thread.category.name }}
+                                    </span>
+                                    {% if thread.is_pinned %}
+                                    <span class="badge-pinned-modern">
+                                        <i class="bi bi-pin-fill"></i> Pinned
+                                    </span>
+                                    {% endif %}
+                                    {% if thread.is_closed %}
+                                    <span class="badge-closed-modern">
+                                        <i class="bi bi-lock-fill"></i> Closed
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                <div class="thread-stats-modern">
+                                    <span><i class="bi bi-eye"></i> {{ thread.views }}</span>
+                                    <span><i class="bi bi-chat"></i> {{ thread.reply_count }}</span>
+                                </div>
                             </div>
-                            <a href="#" class="btn-read">
-                                Read Discussion <i class="bi bi-arrow-right"></i>
-                            </a>
+                            
+                            <h3 class="thread-title-modern">
+                                <a href="#">{{ thread.title }}</a>
+                            </h3>
+                            
+                            <div class="thread-excerpt-modern">
+                                {{ thread.content|richtext|truncatewords_html:35 }}
+                            </div>
+                            
+                            <div class="thread-footer-modern">
+                                <div class="author-info-modern">
+                                    <div class="author-avatar">
+                                        <i class="bi bi-person-circle"></i>
+                                    </div>
+                                    <div class="author-details">
+                                        <span class="author-name">{{ thread.created_by_name|default:"Anonymous" }}</span>
+                                        <span class="post-time"><i class="bi bi-clock"></i> {{ thread.created_at|timesince }} ago</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn-read-modern">
+                                    <span>Read Discussion</span>
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     {% empty %}
-                    <div class="empty-state">
-                        <i class="bi bi-chat-square-dots"></i>
-                        <h4>No discussions yet</h4>
-                        <p>Be the first to start a conversation!</p>
-                        <a href="#" class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#newThreadModal">
+                    <div class="empty-state-modern">
+                        <div class="empty-icon">
+                            <i class="bi bi-chat-square-dots"></i>
+                        </div>
+                        <h3>No discussions yet</h3>
+                        <p>Be the first to start a conversation in our community!</p>
+                        <a href="#" class="btn-start-modern" data-bs-toggle="modal" data-bs-target="#newThreadModal">
                             <i class="bi bi-plus-circle"></i> Start New Discussion
                         </a>
                     </div>
                     {% endfor %}
                 </div>
+                
+                <!-- Pagination -->
+                <div class="pagination-modern">
+                    <a href="#" class="page-prev disabled">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                    <a href="#" class="page-num active">1</a>
+                    <a href="#" class="page-num">2</a>
+                    <a href="#" class="page-num">3</a>
+                    <span class="page-dots">...</span>
+                    <a href="#" class="page-num">8</a>
+                    <a href="#" class="page-next">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- New Thread Modal -->
+    <!-- New Thread Modal - Modern Redesign -->
     <div class="modal fade" id="newThreadModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header" style="background: var(--gradient-green); color: white;">
-                    <h5 class="modal-title">Start New Discussion</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content modal-content-modern">
+                <div class="modal-header-modern">
+                    <h5 class="modal-title">
+                        <i class="bi bi-plus-circle"></i> Start a New Discussion
+                    </h5>
+                    <button type="button" class="btn-close-modern" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body-modern">
                     <form method="post" action="#">
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label class="form-label">Your Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                        <div class="form-group-modern">
+                            <label>
+                                <i class="bi bi-person"></i>
+                                Your Name
+                            </label>
+                            <input type="text" class="form-control-modern" placeholder="Enter your name" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email (optional)</label>
-                            <input type="email" class="form-control" name="email">
+                        
+                        <div class="form-group-modern">
+                            <label>
+                                <i class="bi bi-envelope"></i>
+                                Email <span class="optional">(optional)</span>
+                            </label>
+                            <input type="email" class="form-control-modern" placeholder="We'll notify you of replies">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Category</label>
-                            <select class="form-control" name="category" required>
-                                <option value="">Select a topic...</option>
+                        
+                        <div class="form-group-modern">
+                            <label>
+                                <i class="bi bi-tag"></i>
+                                Category
+                            </label>
+                            <select class="form-control-modern" required>
+                                <option value="" disabled selected>Select a topic category</option>
                                 {% for category in categories %}
                                 <option value="{{ category.id }}">{{ category.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Question Title</label>
-                            <input type="text" class="form-control" name="title" required>
+                        
+                        <div class="form-group-modern">
+                            <label>
+                                <i class="bi bi-question-circle"></i>
+                                Question Title
+                            </label>
+                            <input type="text" class="form-control-modern" placeholder="Summarize your question" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Your Question</label>
-                            <textarea class="form-control" name="content" rows="6" required></textarea>
+                        
+                        <div class="form-group-modern">
+                            <label>
+                                <i class="bi bi-pencil"></i>
+                                Your Question
+                            </label>
+                            <textarea class="form-control-modern" rows="5" placeholder="Provide details about your question..." required></textarea>
+                        </div>
+                        
+                        <div class="form-check-modern">
+                            <input type="checkbox" id="notifyCheck">
+                            <label for="notifyCheck">Notify me of replies via email</label>
+                        </div>
+                        
+                        <div class="modal-actions">
+                            <button type="button" class="btn-cancel-modern" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn-submit-modern">
+                                <i class="bi bi-send"></i>
+                                Post Discussion
+                            </button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary-custom">Post Discussion</button>
                 </div>
             </div>
         </div>
