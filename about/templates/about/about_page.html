@@ -4,49 +4,39 @@
 {% block body_class %}template-about-page{% endblock %}
 
 {% block content %}
-    <!-- Hero Section - ENLARGED like Commodities page -->
-    <div class="about-hero">
-        <div class="hero-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
-                        <!-- Badge -->
-                        <div class="hero-badge">
-                            <span class="badge-custom">ABOUT RAISE</span>
-                        </div>
-                        
-                        <!-- Title -->
-                        <h1 class="about-hero-title">{{ page.hero_title }}</h1>
-                        
-                        <!-- Subtitle -->
-                        <p class="about-hero-subtitle">{{ page.hero_subtitle }}</p>
-                        
-                        <!-- Stats Cards - Redesigned like Commodities -->
-                        <div class="stats-wrapper mt-5">
-                            <div class="stat-card">
-                                <div class="stat-number">5+</div>
-                                <div class="stat-label">PARTNER INSTITUTIONS</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">50+</div>
-                                <div class="stat-label">RESEARCH PROJECTS</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">100+</div>
-                                <div class="stat-label">TECHNOLOGIES</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">1000+</div>
-                                <div class="stat-label">BENEFICIARIES</div>
-                            </div>
-                        </div>
-                    </div>
+   <!-- Hero Section - Dark Green (Matching Program Rationale) -->
+<div class="about-hero">
+    <!-- Decorative Elements -->
+    <div class="hero-shape shape-1"></div>
+    <div class="hero-shape shape-2"></div>
+    <div class="hero-shape shape-3"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center" data-aos="fade-up">
+                <!-- Clean Badge - Just text -->
+                <div class="hero-badge">
+                    <span class="badge-custom">ABOUT RAISE</span>
+                </div>
+                
+                <!-- Title -->
+                <h1 class="about-hero-title">{{ page.hero_title }}</h1>
+                
+                <!-- Subtitle -->
+                <p class="about-hero-subtitle">{{ page.hero_subtitle }}</p>
+                
+                <!-- Inspiring Tagline -->
+                <div class="hero-tagline">
+                    <i class="bi bi-quote"></i>
+                    <p class="tagline-text">Building bridges through alignment, connection, and synchronization for agri-aqua innovation</p>
+                    <i class="bi bi-quote"></i>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Knowledge Hub Section -->
+    <!-- Knowledge Hub Section - WHITE -->
     <div class="container my-5 py-5">
         <div class="knowledge-hub-card" data-aos="fade-up">
             <div class="row align-items-center">
@@ -85,7 +75,7 @@
         </div>
     </div>
 
-    <!-- Program Rationale Section -->
+    <!-- Program Rationale Section - LIGHT GREEN -->
     <div class="rationale-section">
         <div class="container">
             <div class="row">
@@ -144,66 +134,68 @@
         </div>
     </div>
 
-    <!-- Program Objectives Section -->
-    <div class="container my-5 py-5">
-        <h2 class="section-title text-center mb-5" data-aos="fade-up">{{ page.objectives_title }}</h2>
-        
-        <div class="row g-4">
-            <!-- General Objective -->
-            <div class="col-lg-6" data-aos="fade-right">
-                <div class="objective-card">
-                    <div class="objective-icon general-icon">
-                        <i class="bi bi-bullseye"></i>
-                    </div>
-                    <h3 class="objective-title">{{ page.general_objective_title }}</h3>
-                    <div class="objective-text">
-                        {{ page.general_objective }}
+    <!-- Program Objectives Section - GREEN (NEW) -->
+    <div class="objectives-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5 text-white" data-aos="fade-up">{{ page.objectives_title }}</h2>
+            
+            <div class="row g-4">
+                <!-- General Objective -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="objective-card-green">
+                        <div class="objective-icon-green general-icon-green">
+                            <i class="bi bi-bullseye"></i>
+                        </div>
+                        <h3 class="objective-title-green">{{ page.general_objective_title }}</h3>
+                        <div class="objective-text-green">
+                            {{ page.general_objective }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Specific Objectives -->
-            <div class="col-lg-6" data-aos="fade-left">
-                <div class="objective-card">
-                    <div class="objective-icon specific-icon">
-                        <i class="bi bi-list-check"></i>
-                    </div>
-                    <h3 class="objective-title">{{ page.specific_objectives_title }}</h3>
-                    <div class="objective-text">
-                        {{ page.specific_objectives|richtext }}
+                
+                <!-- Specific Objectives -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="objective-card-green">
+                        <div class="objective-icon-green specific-icon-green">
+                            <i class="bi bi-list-check"></i>
+                        </div>
+                        <h3 class="objective-title-green">{{ page.specific_objectives_title }}</h3>
+                        <div class="objective-text-green">
+                            {{ page.specific_objectives|richtext }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Organizational Structure Section -->
-    <div class="org-section">
+    <!-- Organizational Structure Section - WHITE -->
+    <div class="org-section-white">
         <div class="container">
             <h2 class="section-title text-center mb-4" data-aos="fade-up">{{ page.org_title }}</h2>
-            <p class="org-description text-center mb-5" data-aos="fade-up">{{ page.org_description }}</p>
+            <p class="org-description-white text-center mb-5" data-aos="fade-up">{{ page.org_description }}</p>
             
             {% if page.org_image %}
-            <div class="org-image-wrapper" data-aos="zoom-in">
+            <div class="org-image-wrapper-white" data-aos="zoom-in">
                 {% image page.org_image width-1200 class="org-image img-fluid" %}
             </div>
             {% endif %}
             
             <!-- Organizational Highlights -->
-            <div class="highlights-grid mt-5">
-                <div class="highlight-item">
+            <div class="highlights-grid-white mt-5">
+                <div class="highlight-item-white">
                     <i class="bi bi-people"></i>
                     <span>Project Leaders</span>
                 </div>
-                <div class="highlight-item">
+                <div class="highlight-item-white">
                     <i class="bi bi-diagram-2"></i>
                     <span>Technical Staff</span>
                 </div>
-                <div class="highlight-item">
+                <div class="highlight-item-white">
                     <i class="bi bi-briefcase"></i>
                     <span>Administrative</span>
                 </div>
-                <div class="highlight-item">
+                <div class="highlight-item-white">
                     <i class="bi bi-people-fill"></i>
                     <span>Researchers</span>
                 </div>
@@ -211,40 +203,40 @@
         </div>
     </div>
 
-    <!-- RAISE Projects Section -->
-    <div class="projects-section">
+    <!-- RAISE Projects Section - LIGHT GREEN -->
+    <div class="projects-section-light">
         <div class="container">
             <h2 class="section-title text-center mb-4" data-aos="fade-up">{{ page.projects_title }}</h2>
-            <p class="projects-description text-center mb-5" data-aos="fade-up">{{ page.projects_description }}</p>
+            <p class="projects-description-light text-center mb-5" data-aos="fade-up">{{ page.projects_description }}</p>
             
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-                    <div class="projects-image-wrapper">
+                    <div class="projects-image-wrapper-light">
                         {% if page.projects_image %}
                             {% image page.projects_image width-800 class="projects-image img-fluid" %}
                         {% endif %}
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
-                    <div class="timeline-wrapper">
+                    <div class="timeline-wrapper-light">
                         <h4 class="mb-4">Current Initiatives</h4>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
+                        <div class="timeline-item-light">
+                            <div class="timeline-dot-light"></div>
+                            <div class="timeline-content-light">
                                 <h5>IP-TBM Phase 2</h5>
                                 <p>Intellectual Property and Technology Business Management</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
+                        <div class="timeline-item-light">
+                            <div class="timeline-dot-light"></div>
+                            <div class="timeline-content-light">
                                 <h5>ATBI Phase 2</h5>
                                 <p>Agri-Aqua Technology Business Incubator</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
+                        <div class="timeline-item-light">
+                            <div class="timeline-dot-light"></div>
+                            <div class="timeline-content-light">
                                 <h5>Technology Transfer</h5>
                                 <p>Commercialization of S&T Innovations</p>
                             </div>
